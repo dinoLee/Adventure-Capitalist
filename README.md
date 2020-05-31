@@ -17,7 +17,29 @@ Play Environment : [Web browser (mobile / desktop) of Cocos Creator support](htt
 4) Hire Potato Manager to Need $10. If You have enough money, so Hire Potato Manager. Then, automate to repeat 1), 2). 
 5) If Reset Game, Pick Reset Button at the bottom right of the screen.
 
+### How to change static data for custom play
+- [static data file](https://github.com/dinoLee/Adventure-Capitalist/blob/master/WorkSpace/assets/resources/Data/StaticData.json)
+- Maximum Business Count : 5
 
+```
+Business Data Structure
+{ 
+  "Index":1, // Index begin from 1
+  "Name":"Potato", // Business Name
+  "Price":1, // Business purchase price per piece
+  "Output":1, // Business Operation OutPut 
+  "DurationSecTime":5, // Business Operation Duration(seconds)
+  "UpgradePrice":100, // Upgrade purchase  Price for Business
+  "UpgradeEffect":10 // If Upgraded, get a 10 times of Potato OutPut.
+}
+
+Manager Data Structure
+{
+  "Index":1, // Index begin from 1. This index is same Business Data Index.
+  "Name":"Jack", // Manager Name
+  "Price":10 // Hiring Price of Manager
+}
+```
 ### Description of the problem and solution.
 1)
 - Problem) Table data format<br>
