@@ -10,6 +10,14 @@ Play Environment : [Web browser (mobile / desktop) of Cocos Creator support](htt
 
 [Play](https://dinolee.github.io/Adventure-Capitalist/Deploy/index.html)
 
+### How to play
+1) Pick Potato, so Begin to Operate.
+2) After 5 sec, get $1 for Potato OutPut.
+3) Buy Potato, so get one Potato. and repeat 1), 2), 3).
+4) Hire Potato Manager to Need $10. If You have enough money, so Hire Potato Manager. Then, automate to repeat 1), 2). 
+5) If Reset Game, Pick Reset Button at the bottom right of the screen.
+
+
 ### Description of the problem and solution.
 1)
 - Problem) Table data format<br>
