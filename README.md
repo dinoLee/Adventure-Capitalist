@@ -40,6 +40,9 @@ Manager Data Structure
   "Price":10 // Hiring Price of Manager
 }
 ```
+### Game Flow Diagram
+![Image](https://github.com/dinoLee/Adventure-Capitalist/blob/master/Adventure-Capitalist.png)
+
 ### Description of the problem and solution.
 1)
 - Problem) Table data format<br>
