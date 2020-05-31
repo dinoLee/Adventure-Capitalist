@@ -86,8 +86,7 @@ Since there is no game server, I decided to use the storage space in the browser
 - Reasoning)
 There is no time and cost to build a game server, and it can be important to check the gameability by quickly implementing only the core of the game.
 
-- Problem) 게임 플레이 지속 문제
-
+- Problem) 게임 플레이 지속 문제<br>
 게임 진행 중인 브라우저를 닫고, 다시 열면, 이전에 하던 게임을 다시 시작하게 할 때, 사용자의 게임 데이터 저장이 필요하다.
 
 - Solution)
@@ -168,15 +167,15 @@ This can be a good choice, as the user cannot arbitrarily manipulate the time on
 윈격지의 타임서버의 시간을 사용자가 임의로 조작할 수 없으므로, 좋은 선택일 수 있다. 
 5)
 - Problem) Problem saving game data in a web browser<br>
-1. Even if it is encrypted and stored, there is a possibility that the user can open it and operate it.
-2. If you play the game in a browser other than the one where you started the game, you must start from the beginning.
+1.Even if it is encrypted and stored, there is a possibility that the user can open it and operate it.<br>
+2.If you play the game in a browser other than the one where you started the game, you must start from the beginning.
 - Solution)
 Using the storage provided by Firebase, the user's game data is stored in a remote storage.
 - Reasoning)
 With Firebase, you can use the storage functions you need, saving you a lot of development time and avoiding the various issues associated with building your server, rather than building your own storage server.
 
 - Problem) 웹브라우저내에 게임 데이터를 저장하는 문제<br>
-1.암호화를 하여, 저장을 하더라도, 사용자가 열어 조작할 수 있는 가능성이 있다.
+1.암호화를 하여, 저장을 하더라도, 사용자가 열어 조작할 수 있는 가능성이 있다.<br>
 2.게임을 처음 시작한 브라우저가 아닌 다른 브라우저에서 게임을 하면, 처음부터 시작해야 한다.
 - Solution)
 Firebase 등에서 제공하는 스토리지를 사용하여, 원격지의 저장소에 사용자의 게임 데이터를 저장한다.
