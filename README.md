@@ -1,10 +1,10 @@
 ## Welcome to Adventure-Capitalist Pages
 
-Development Tool : Cocos Creator v2.3.4
+Development Tool : [Cocos Creator v2.3.4](https://www.cocos.com/en/creator/download)
 
-Development Script : Typescript
+Development Script : [Typescript](https://www.typescriptlang.org/)
 
-Static Data Format : json
+Static Data Format : [json](https://www.json.org/json-en.html)
 
 Play Environment : [Web browser (mobile / desktop) of Cocos Creator support](https://docs.cocos.com/creator/manual/en/publish/publish-web.html#browser-compatibility)
 
@@ -95,6 +95,19 @@ There is no time and cost to build a game server, and it can be important to che
 
 - Reasoning)
 게임 서버를 구축할 시간과 비용이 없고, 게임의 핵심만을 빠르게 구현하여, 게임성을 확인하는 것이 중요할 수 있다.
+4)
+- Problem) Area separation of Resource, data, and source code files 
+- Solution)
+Create resources, Scene, and Script folders under Cocos Creator's project Assets folder, and separate and place the files in the data, screen, and script areas.
+Create each folder of Model, View, Controller in the Script folder, and put the script file of the relevant area.
+- Reasoning)
+If you put the files in the folder according to the use of the file in the project folder, file management becomes easier. In the case of scripts, the conceptual division of MVC is divided into actual folders. This clearly shows the role of the file.
+- Problem) 리소스, 데이터, 소스 코드 파일의 영역 구분
+- Solution)
+Cocos Creator 의 프로젝트 Assets 폴더 하위에 resources, Scene, Script 폴더를 만들어서, 데이터, 화면, 스크립트 영역의 파일들을 각각 구분하여, 놓기.
+Script 폴더내에 Model, View, Controller 각각의 폴더를 만들어서, 해당 영역의 스크립트 파일을 두기.
+- Reasoning)
+프로젝트 폴더안에 파일의 쓰임에 따른 폴더안에 해당 파일들을 두게 되면, 파일 관리가 편하여 진다. 그리고, 스크립트의 경우 MVC 개념적인 구분이 실제 폴더로 구분된다. 이것은 명확하게 해당 파일이 하는 역할을 알 수 있다.
 
 ### Trade-offs you might have made, anything you left out, or what you might do differently if you were to spend additional time on the project.
 1)
@@ -112,8 +125,8 @@ FSM 를 도입하여, 게임 상태를 구분하고, 전환할 수 있도록 하
 - Reasoning)
 게임 상태가 빈번하게 변경될 때, FSM 으로 상태간 관계에 따라 Data, View 등을 적절하게 처리하는 것은 상태에 따른 코드들을 격리하는 효과가 있어서, 이로 인한 이슈를 줄일 수 있다.
 2)
-- Problem) Business status management<br>
-The business status is divided into 5 categories: None, Ready, Play, BeginBusiness, and EndBusiness, and it is processed as Switch-Case. When the business status is changed, added, or deleted, all codes related to Switch-Case are modified, and the scope of code impact due to the modification is widened, so that the cause of unknown cause can be created.
+- Problem) Business state management<br>
+The business state is divided into 5 categories: None, Ready, Play, BeginBusiness, and EndBusiness, and it is processed as Switch-Case. When the business state is changed, added, or deleted, all codes related to Switch-Case are modified, and the scope of code impact due to the modification is widened, so that the cause of unknown cause can be created.
 - Solution)
 There is a way to have a class/function that handles only the state for each business state, put it in a state container, and notify the state container when it becomes a necessary state, so that the state class/function handles it.
 - Reasoning)
@@ -127,32 +140,32 @@ Business 상태별로 해당 상태만을 처리하는 class/function를 두고,
 Business 상태별로 해당 상태만을 처리하는 class/function를 사용하면, 상태간 코드가 겪리되어, 수정시, 해당 상태에만 집중하여, 처리를 할 수 었어, 이슈를 최소화 할 수 있다.
 3)
 - Problem) UserBusiness data storage processing<br>
-I am reading / writing game data locally in the UserBusiness class. If a storage server is introduced, the storage processing depends on the UserBusiness class, and the UserBusiness class code needs to be modified to affect the UserBusiness class code.
+Here, the game data is read / written locally in the UserBusiness class. If a storage server is introduced, the storage processing depends on the UserBusiness class, and the UserBusiness class code needs to be modified. This affects the UserBusiness class code, which may create other issues.
 - Solution)
 A controller for storing processing is separately set, and user business data is read / written. There is no server at this time, but you can create a mock server as if you have a server, so that the controller can send and load data to the mock server.
 - Reasoning)
-The game data storage processing is separated from the UserBusiness class, and a data storage / reading server and a mock server are introduced. Then, there is no real server, but you can implement it as if you have a server. Since it is implemented as if there is a real server, most of the client area can be tested during the server linkage test. Even when the actual storage server is used later, the game server can be interlocked by only changing the server address to the real server.
+The game data storage processing is separated from the UserBusiness class, and a data storage / reading Controller and a mock server are introduced. Then, there is no real server, but you can implement it as if you have a server. Since it is implemented as if there is a real server, most of the client area can be tested during the server linkage test. Even when the actual storage server is used later, the game server can be connected by only changing the server address to the real server.
 
 - Problem) UserBusiness 데이터 저장 처리<br>
-UserBusiness 클래스 내에서 게임 데이터를 로컬에 읽기/쓰기를 하고 있다. 저장소 서버가 도입된다면, 저장 처리가 UserBusiness  클래스에 종속되어, UserBusiness 클래스 코드를 수정해야 하여, UserBusiness 클래스 코드에 영향을 주게 된다. 
+여기서는 UserBusiness 클래스 내에서 게임 데이터를 로컬에 읽기/쓰기를 하고 있다. 저장소 서버가 도입된다면, 저장 처리가 UserBusiness  클래스에 종속되어, UserBusiness 클래스 코드를 수정해야 한다. 이것은 UserBusiness 클래스 코드에 영향을 주게 되어, 다른 이슈를 만들수도 있습니다.
 - Solution)
 저장 처리를 하는 Controller 를 별도로 두고, 여기서, UserBusiness 데이터 읽기/쓰기를 처리를 한다. 지금은 서버가 없지만, 서버가 있는 것처럼 Mock 서버를 만들어서, Controller 이 Mock 서버에게 데이터를 전송하고, 로드하는 것처럼 할 수 있다.
 - Reasoning)
-게임 데이터 저장 처리를 UserBusiness 클래스와 분리하고, 데이터 저장/읽기 서버와 Mock 서버를 도입한다. 그러면, 실제 서버가 없지만, 서버가 있는 것처럼 구현할 수 있다. 실제 서버가 있는 것처럼 구현되므로, 서버 연동 테스트 중 클라이언트 영역은 거의 대부분의 테스트를 해 볼 수 있다. 나중에 실제 저장소 서버를 사용하게 될 때도, 서버 주소 정도만을 실제 서버로 변경하는 수정만으로, 게임 서버 연동을 할 수도 있다.
+게임 데이터 저장 처리를 UserBusiness 클래스와 분리하고, 데이터 저장/읽기 Controller와 Mock 서버를 도입한다. 그러면, 실제 서버가 없지만, 서버가 있는 것처럼 구현할 수 있다. 실제 서버가 있는 것처럼 구현되므로, 서버 연동 테스트 중 클라이언트 영역은 거의 대부분의 테스트를 해 볼 수 있다. 나중에 실제 저장소 서버를 사용하게 될 때도, 서버 주소 정도만을 실제 서버로 변경하는 수정만으로, 게임 서버 연결을 할 수도 있다.
 4)
 - Problem) Time handling problem<br>
 When a manager is hired and production is performed automatically, the time of the web browser is taken and the time is calculated, and there is a possibility of obtaining a large amount of money by manipulating the time in the web browser.
 - Solution)
 Getting and using time from the time server
 - Reasoning)
-The time of the Wingeungji time server is not a user's choice, so it is a good choice.
+This can be a good choice, as the user cannot arbitrarily manipulate the time on the remote time server.
 
 - Problem) 시간 처리 문제<br>
 매니저를 고용하여, 자동으로 생산을 하게 되는 경우, 웹브라우저의 시간을 가져다가 시간 계산을 하고 있어, 웹브라우저내의 시간을 조작하여, 많은 양의 머니를 획득할 가능성이 있다.
 - Solution)
 타임서버에서 시간을 가져와서, 사용하기
 - Reasoning)
-윈격지의 타임서버의 시간은 사용자가 임의로 조작할 수 없으므로, 좋은 선택이다.
+윈격지의 타임서버의 시간을 사용자가 임의로 조작할 수 없으므로, 좋은 선택일 수 있다. 
 5)
 - Problem) Problem saving game data in a web browser<br>
 1. Even if it is encrypted and stored, there is a possibility that the user can open it and operate it.
@@ -160,7 +173,7 @@ The time of the Wingeungji time server is not a user's choice, so it is a good c
 - Solution)
 Using the storage provided by Firebase, the user's game data is stored in a remote storage.
 - Reasoning)
-With Firebase, you can use the storage functions you need, saving you a lot of development time and avoiding the various issues associated with building your own, rather than building your own storage server.
+With Firebase, you can use the storage functions you need, saving you a lot of development time and avoiding the various issues associated with building your server, rather than building your own storage server.
 
 - Problem) 웹브라우저내에 게임 데이터를 저장하는 문제<br>
 1.암호화를 하여, 저장을 하더라도, 사용자가 열어 조작할 수 있는 가능성이 있다.
@@ -173,16 +186,16 @@ Firebase 를 사용하면, 필요한 스토리지 기능을 사용할 수 있어
 - Problem) When adding business data, the problem of adding the corresponding business view<br>
 It is necessary to have the Business View automatically configured for the number of business data.
 - Solution)
-Using Cocos Creator's Prefab Clone function, you can create a business view according to the number of business data.
+Using Cocos Creator's Prefab Clone function, you can create business views according to the number of business data.
 - Reasoning)
-Since the game's UI and views can be changed frequently, it is advantageous to reduce the development time and effort by outputting data to the screen based on data.
+The game's UI and views can be changed frequently. It is advantageous to reduce the development time and effort by having a data-based output on the screen.
 
 - Problem) Business 데이터를 추가할 때, 해당 Business View 를 추가작업하는 문제<br>
 Business 데이터의 수에 맞게 Business View 가 자동으로 구성되도록 하는 것이 필요하다.
 - Solution)
 Cocos Creator 의 Prefab Clone 기능을 이용하여, Business 데이터의 수에 맞게 Business View 를 생성할 수 있다.
 - Reasoning)
-게임의 UI 와 View 들은 빈번하게 변경할 수 있기 때문에, 데이터 기반으로, 화면에 출력하도록 하는 것이, 개발 시간과 수고를 줄이는데 유리하다.
+게임의 UI 와 View 들은 빈번하게 변경할 수 있다. 데이터 기반으로, 화면에 출력하도록 하는 것이, 개발 시간과 수고를 줄이는데 유리하다.
 7)
 - Problem) Reset Game<br>
 If you select the Reset button at the bottom right of the screen, the game will be reset immediately without any warning, and if you make a mistake, you cannot recover it.
@@ -201,21 +214,21 @@ Reset 여부를 확인하는 팝업창을 노출하여, 여기서, 확인된 경
 - Problem) Start screen<br>
 There is no start screen, so when you start the game for the first time, you can see the Business View reset, so the view is not good.
 - Solution)
-Configure the Start button, title, etc. on the start screen, and select the Start button so that Business View settings are shown.
+Configure the Start button and title on the Start screen, select the Start button, and make the Business View settings appear.
 
 - Problem) 시작화면<br>
 시작 화면이 없어서, 처음 게임을 시작하면, Business View 가 초기화 되는 모습을 볼 수 있어, 보기가 좋지 않다.
 - Solution)
-시작 화면에 Start 버튼과 타이틀 등을 구성하고, Start 버튼을 선택하면, Business View 설정이 다 된 상태가 보이도록 하기.
+시작 화면에 Start 버튼과 타이틀 등을 구성하고, Start 버튼을 선택하고, Business View 설정이 다 된 상태가 보이도록 합니다.
 9) 
 - Problem) Build and deployment process automation
 - Solution)
-Write command line build scripts, integrate Git, Jenkin, and distribute them so that they can be automatically distributed to servers for testing after code and resource modifications.
+To automatically deploy to the server for testing after modifying code and resources, write a Command Line build script, integrate Git, Jenkin, and deploy
 - Reasoning)
 By automating the deployment process, you can avoid mistakes caused by manual builds and deployments, and the resulting stability reduces development stress. Due to the automation, you can check the build status at any time, and you can immediately check the issues, so you can respond as necessary.
 
 - Problem) 빌드 및 배포과정 자동화
 - Solution)
-코드 및 리소스 수정 후에 테스트를 위한 서버에 자동으로 배포할 수 있도록, Command Line  빌드 스크립트를 작성하고, Git, Jenkin 를 연동하여, 배포하기
+코드 및 리소스 수정 후에 테스트를 위한 서버에 자동으로 배포하려면, Command Line 빌드 스크립트를 작성하고, Git, Jenkin 를 연동하여, 배포하기
 - Reasoning)
 배포 과정을 자동화 하면, 수동 빌드, 배포로 인한 실수를 예방할 수 있고, 이로 인한 안정감은 개발 스트레스를 줄인다. 자동화 인해, 언제든 빌드 상태를 확인할 수 있어, 이슈를 바로 확인할 수 있어, 필요한 대응을 할 수 있다.
