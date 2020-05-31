@@ -8,7 +8,7 @@ Static Data Format : json
 
 Play Environment : [Web browser (mobile / desktop) of Cocos Creator support](https://docs.cocos.com/creator/manual/en/publish/publish-web.html#browser-compatibility)
 
-
+[Play](https://dinolee.github.io/Adventure-Capitalist/Deploy/index.html)
 
 ### Description of the problem and solution.
 1)
